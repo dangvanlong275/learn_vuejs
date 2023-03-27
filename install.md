@@ -1,0 +1,3 @@
+### Linux
+- npm install -g @vue/cli
+- npm install -g @vue/cli-init

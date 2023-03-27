@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+        <h1>{{upperCase }}</h1>
+        <div>
+            <button @click="counterComputed++">computed button</button>
+            <p>{{ counterComputed }}</p> <br />
+            <button @click="counterMethod++">method button</button>
+            <p>{{ counterMethod }}</p> <br />
+            {{ printTextMethod() }}
+            {{ printTextComputed }}
+        </div>
+    </div>
+</body>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<script>
+    const { createApp } = Vue
+
+    const data = {
+        title: "hello world!",
+    }
+
+    const cpt = {
+        data() {
+            return {
+                title: 'hello world!'
+            }
+        },
+        template: "<h1 @click='changeTitle()'>{{this.title}}</h1>",
+        methods: {
+            changeTitle() {
+                this.title = "Hello change!"
+            }
+        }
+    }
+
+
+    const app = createApp({
+        components: {
+            'hello': cpt
+        },
+        data() {
+            return {
+                counterComputed: 0,
+                counterMethod: 0,
+                text: 'Hello world'
+            };
+        },
+        computed: {
+            printTextComputed() {
+                console.log("counter printed from computed:",
+                    this.counterComputed);
+            },
+            upperCase(text) {
+                console.log(text.text);
+                return text.text.toUpperCase();
+            }
+        },
+        methods: {
+            printTextMethod() {
+                console.log("counter printed from method:", this.counterMethod);
+            }
+        },
+    }).mount('#root')
+
+</script>
+
+</html>
